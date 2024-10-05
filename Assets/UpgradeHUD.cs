@@ -32,7 +32,7 @@ public class UpgradeHUD : MonoBehaviour
             BuyUpgradeButton[0].interactable = true;
         else BuyUpgradeButton[0].interactable = false;
 
-        if (ColonyScript.leaves >= currentCosts[1])
+        if (ColonyScript.meat >= currentCosts[1])
             BuyUpgradeButton[1].interactable = true;
         else BuyUpgradeButton[1].interactable = false;
     }
@@ -68,6 +68,7 @@ public class UpgradeHUD : MonoBehaviour
 
     public void Upgrade1()
     {
+        ColonyScript.SpendLeaves(currentCosts[0]);
         switch (currentSelected, RoomUpgrades[currentSelected].upgradesBought1)
         {
             case (0, 0):
@@ -103,6 +104,7 @@ public class UpgradeHUD : MonoBehaviour
 
     public void Upgrade2()
     {
+        ColonyScript.SpendMeat(currentCosts[1]);
         switch (currentSelected, RoomUpgrades[currentSelected].upgradesBought2)
         {
             case (0, 0):
@@ -127,11 +129,11 @@ public class UpgradeHUD : MonoBehaviour
                 break;
             case (3, 2):
                 LeafcuttersScript.LeavesCollected[0] = 5;
-                LeafcuttersScript.LeavesCollected[1] = 7;
+                LeafcuttersScript.LeavesCollected[1] = 8;
                 break;
             case (4, 3):
                 LeafcuttersScript.LeavesCollected[0] = 7;
-                LeafcuttersScript.LeavesCollected[1] = 10;
+                LeafcuttersScript.LeavesCollected[1] = 12;
                 break;
         }
         RoomUpgrades[currentSelected].upgradesBought2++;

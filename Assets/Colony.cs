@@ -10,25 +10,31 @@ public class Colony : MonoBehaviour
 
     [Header("Stats")]
     public int workerPower;
+    public int[] workerDamage;
     public float summonMultiplyer;
     public bool autoSpawn;
     public float progress, timeToSpawn;
+    int roll;
+    float temp;
 
     [Header("UI")]
+    public GameObject LeafcutterUpgrade;
     public Image ProgressBar;
+    public Image HealthBar;
 
     [Header("Resources")]
     public int leaves;
-    public int level, experience, experienceReq;
+    public int meat, level, experience, experienceReq;
 
     [Header("Resources UI")]
     public TMPro.TextMeshProUGUI LeavesCountText;
+    public TMPro.TextMeshProUGUI MeatCountText;
     public Image ExperienceBar;
 
     [Header("Dig")]
-    public int diggingProgress;
+    public int[] diggingProgress;
     public int[] diggingRequirement;
-    public int roomsDug;
+    public int roomSelected;
 
     [Header("Dig UI")]
     public GameObject[] UnlockObject;
@@ -37,10 +43,16 @@ public class Colony : MonoBehaviour
     [Header("Rooms")]
     public GameObject[] RoomObject;
 
+    [Header("Mobile")]
+    public int encounter;
+    public int MaxHealth, HitPoints;
+
     void Start()
     {
         level = 1;
         experienceReq = NextLevelExpReq();
+        encounter = 1;
+        SetEncounter();
     }
 
     void Update()
@@ -55,37 +67,69 @@ public class Colony : MonoBehaviour
         while (progress >= timeToSpawn)
         {
             progress -= timeToSpawn;
-            Dig(workerPower);
+            SpawnAnt();
         }
         ProgressBar.fillAmount = progress / timeToSpawn;
     }
 
+    public void SelectRoom(int room)
+    {
+        roomSelected = room;
+    }
+
     public void QueenClicked()
     {
-        Dig(workerPower);
+        SpawnAnt();
+    }
+
+    void SpawnAnt()
+    {
+        if (roomSelected == 0)
+            WorkerCombat();
+        else Dig(workerPower);
+    }
+
+    void WorkerCombat()
+    {
+        roll = Random.Range(workerDamage[0], workerDamage[1] + 1);
+        roll *= workerPower;
+
+        TakeDamage(roll);
+    }
+
+    void TakeDamage(int amount)
+    {
+        HitPoints -= amount;
+        if (HitPoints <= 0)
+        {
+            GainMeat(6 + encounter / 3);
+            GainExperience(21 + encounter);
+            encounter++;
+            SetEncounter();
+        }
+        HealthBar.fillAmount = (HitPoints * 1f) / (MaxHealth * 1f);
     }
 
     void Dig(int amount)
     {
-        diggingProgress += amount;
-        if (diggingProgress >= diggingRequirement[roomsDug])
-            RoomDug();
-        UnlockProgressText[roomsDug].text = diggingProgress.ToString() + "/" + diggingRequirement[roomsDug].ToString();
+        diggingProgress[roomSelected - 1] += amount;
+        UnlockProgressText[roomSelected - 1].text = diggingProgress[roomSelected - 1].ToString() + "/" + diggingRequirement[roomSelected - 1].ToString();
+        if (diggingProgress[roomSelected - 1] >= diggingRequirement[roomSelected - 1])
+            RoomDug(roomSelected - 1);
     }
 
-    void RoomDug()
+    void RoomDug(int which)
     {
-        UnlockObject[roomsDug].SetActive(false);
-        RoomObject[roomsDug].SetActive(true);
-        switch (roomsDug)
+        UnlockObject[which].SetActive(false);
+        RoomObject[which].SetActive(true);
+        switch (which)
         {
             case 0:
                 LeafcuttersScript.built = true;
+                LeafcutterUpgrade.SetActive(true);
                 break;
         }
-        diggingProgress -= diggingRequirement[roomsDug];
-        roomsDug++;
-        UnlockObject[roomsDug].SetActive(true);
+        SelectRoom(0);
     }
 
     public void GainLeaves(int amount)
@@ -93,6 +137,24 @@ public class Colony : MonoBehaviour
         leaves += amount;
         GainExperience(amount * 2);
         LeavesCountText.text = leaves.ToString();
+    }
+
+    public void SpendLeaves(int amount)
+    {
+        leaves -= amount;
+        LeavesCountText.text = leaves.ToString();
+    }
+
+    void GainMeat(int amount)
+    {
+        meat += amount;
+        MeatCountText.text = meat.ToString();
+    }
+
+    public void SpendMeat(int amount)
+    {
+        meat -= amount;
+        MeatCountText.text = meat.ToString();
     }
 
     public void GainExperience(int amount)
@@ -114,5 +176,13 @@ public class Colony : MonoBehaviour
     int NextLevelExpReq()
     {
         return 20 + level * 20 + level * (level + 1) * 5;
+    }
+
+    void SetEncounter()
+    {
+        temp = (50f + encounter * 2.2f) * (1f + encounter * 0.016f);
+        MaxHealth = Mathf.FloorToInt(temp);
+        HitPoints = MaxHealth;
+        HealthBar.fillAmount = 1f;
     }
 }
