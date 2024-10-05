@@ -98,12 +98,21 @@ public class Colony : MonoBehaviour
     public void GainExperience(int amount)
     {
         experience += amount;
+        if (experience >= experienceReq)
+            LevelUp();
         ExperienceBar.fillAmount = (experience * 1f) / (experienceReq * 1f);
+    }
+
+    void LevelUp()
+    {
+        experience -= experienceReq;
+        level++;
+        experienceReq = NextLevelExpReq();
     }
 
     // Checks
     int NextLevelExpReq()
     {
-        return level * 40 + level * (level + 1) * 5;
+        return 20 + level * 20 + level * (level + 1) * 5;
     }
 }
