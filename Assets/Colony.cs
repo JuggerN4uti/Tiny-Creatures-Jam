@@ -9,7 +9,13 @@ public class Colony : MonoBehaviour
     public Leafcutters LeafcuttersScript;
 
     [Header("Stats")]
+    public int workerPower;
     public float summonMultiplyer;
+    public bool autoSpawn;
+    public float progress, timeToSpawn;
+
+    [Header("UI")]
+    public Image ProgressBar;
 
     [Header("Resources")]
     public int leaves;
@@ -37,9 +43,26 @@ public class Colony : MonoBehaviour
         experienceReq = NextLevelExpReq();
     }
 
+    void Update()
+    {
+        if (autoSpawn)
+            Progress(Time.deltaTime * summonMultiplyer);
+    }
+
+    public void Progress(float value)
+    {
+        progress += value;
+        while (progress >= timeToSpawn)
+        {
+            progress -= timeToSpawn;
+            Dig(workerPower);
+        }
+        ProgressBar.fillAmount = progress / timeToSpawn;
+    }
+
     public void QueenClicked()
     {
-        Dig(1);
+        Dig(workerPower);
     }
 
     void Dig(int amount)
