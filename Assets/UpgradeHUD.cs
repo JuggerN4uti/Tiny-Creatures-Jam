@@ -75,43 +75,43 @@ public class UpgradeHUD : MonoBehaviour
             case (0, 0):
                 SummonWorkersBar.SetActive(true);
                 ColonyScript.autoSpawn = true;
-                ColonyScript.timeToSpawn = 4f;
+                ColonyScript.timeToSpawn = 3.6f;
                 break;
             case (0, 1):
-                ColonyScript.timeToSpawn = 2.8f;
+                ColonyScript.timeToSpawn = 2.5f;
                 break;
             case (0, 2):
-                ColonyScript.timeToSpawn = 2f;
+                ColonyScript.timeToSpawn = 1.8f;
                 break;
             case (0, 3):
-                ColonyScript.timeToSpawn = 1.5f;
+                ColonyScript.timeToSpawn = 1.35f;
                 break;
             case (0, 4):
-                ColonyScript.timeToSpawn = 1.1f;
+                ColonyScript.timeToSpawn = 1f;
                 break;
             case (1, 0):
-                LeafcuttersScript.timeToSpawn = 7f;
+                LeafcuttersScript.timeToSpawn = 6.2f;
                 break;
             case (1, 1):
-                LeafcuttersScript.timeToSpawn = 6.1f;
-                break;
-            case (1, 2):
                 LeafcuttersScript.timeToSpawn = 5.3f;
                 break;
+            case (1, 2):
+                LeafcuttersScript.timeToSpawn = 4.5f;
+                break;
             case (1, 3):
-                LeafcuttersScript.timeToSpawn = 4.6f;
+                LeafcuttersScript.timeToSpawn = 3.8f;
                 break;
             case (2, 0):
-                BulletsScript.timeToSpawn = 9.1f;
+                BulletsScript.timeToSpawn = 8.1f;
                 break;
             case (2, 1):
-                BulletsScript.timeToSpawn = 7.9f;
+                BulletsScript.timeToSpawn = 6.9f;
                 break;
             case (2, 2):
-                BulletsScript.timeToSpawn = 6.8f;
+                BulletsScript.timeToSpawn = 5.8f;
                 break;
             case (2, 3):
-                BulletsScript.timeToSpawn = 5.8f;
+                BulletsScript.timeToSpawn = 4.8f;
                 break;
         }
         RoomUpgrades[currentSelected].upgradesBought1++;

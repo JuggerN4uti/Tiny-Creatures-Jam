@@ -409,10 +409,10 @@ MonoBehaviour:
   upgradeCost1: 20000000e60000007805000064190000
   upgradeCost2: 3700000090010000c4090000e02e0000
   upgradeText1:
-  - 'Spawn Bullet Ant every: 10.4s >> 9.1s'
-  - 'Spawn Bullet Ant every: 9.1s >> 7.9s'
-  - 'Spawn Bullet Ant every: 7.9s >> 6.8s'
-  - 'Spawn Bullet Ant every: 6.8s >> 5.8s'
+  - 'Spawn Bullet Ant every: 9.4s >> 8.1s'
+  - 'Spawn Bullet Ant every: 8.1s >> 6.9s'
+  - 'Spawn Bullet Ant every: 6.9s >> 5.8s'
+  - 'Spawn Bullet Ant every: 5.8s >> 4.8s'
   upgradeText2:
   - 'Damage: 5-7 >> 7-10'
   - 'Damage: 7-10 >> 10-14'
@@ -3421,7 +3421,7 @@ MonoBehaviour:
   built: 0
   secondFloor: 0
   progress: 0
-  timeToSpawn: 8
+  timeToSpawn: 7.2
   LeavesCollected: 0100000002000000
   ProgressBar: {fileID: 1637971982}
   CollectedPrefab: {fileID: 2961634817663886489, guid: 8a6a5f6880fcdc2469ba6412816c9d2b, type: 3}
@@ -4538,10 +4538,10 @@ MonoBehaviour:
   upgradeCost1: 1400000096000000e803000088130000
   upgradeCost2: 20000000f000000040060000401f0000
   upgradeText1:
-  - 'Spawn Leafcutter Ant every: 8s >> 7s'
-  - 'Spawn Leafcutter Ant every: 7s >> 6.1s'
-  - 'Spawn Leafcutter Ant every: 6.1s >> 5.3s'
-  - 'Spawn Leafcutter Ant every: 5.3s >> 4.6s'
+  - 'Spawn Leafcutter Ant every: 7.2s >> 6.2s'
+  - 'Spawn Leafcutter Ant every: 6.2s >> 5.3s'
+  - 'Spawn Leafcutter Ant every: 5.3s >> 4.5s'
+  - 'Spawn Leafcutter Ant every: 4.5s >> 3.8s'
   upgradeText2:
   - 'Leaves Collected: 1-2 >> 2-3'
   - 'Leaves Collected: 2-3 >> 3-5'
@@ -4738,11 +4738,11 @@ MonoBehaviour:
   upgradeCost1: 0a00000046000000c2010000fc080000c8320000
   upgradeCost2: 0f0000006e000000d0020000480d0000
   upgradeText1:
-  - 'Spawn Worker Ant every: 0s >> 4s'
-  - 'Spawn Worker Ant every: 4s >> 2.8s'
-  - 'Spawn Worker Ant every: 2.8s >> 2.1s'
-  - 'Spawn Worker Ant every: 2.1s >> 1.5s'
-  - 'Spawn Worker Ant every: 1.5s >> 1.1s'
+  - 'Spawn Worker Ant every: 0s >> 3.6s'
+  - 'Spawn Worker Ant every: 3.6s >> 2.5s'
+  - 'Spawn Worker Ant every: 2.5s >> 1.8s'
+  - 'Spawn Worker Ant every: 1.8s >> 1.35s'
+  - 'Spawn Worker Ant every: 1.35s >> 1s'
   upgradeText2:
   - 'Increase Power of Worker Ants: 1x >> 2x'
   - 'Increase Power of Worker Ants: 2x >> 3x'
@@ -5300,7 +5300,7 @@ MonoBehaviour:
   built: 0
   secondFloor: 0
   progress: 0
-  timeToSpawn: 10.4
+  timeToSpawn: 9.4
   bulletDamage: 0500000007000000
   ProgressBar: {fileID: 804207656}
 --- !u!1 &1963626845
