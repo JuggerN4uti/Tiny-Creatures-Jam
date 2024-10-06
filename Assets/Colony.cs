@@ -22,21 +22,20 @@ public class Colony : MonoBehaviour
     public GameObject LeafcutterUpgrade;
     public GameObject BulletUpgrade;
     public Image ProgressBar;
-    public Image HealthBar;
 
     [Header("Resources")]
-    public int leaves;
-    public int meat, level, experience, experienceReq;
+    public int ants;
+    public int leaves, meat, level, experience, experienceReq;
 
     [Header("Resources UI")]
-    public TMPro.TextMeshProUGUI LeavesCountText;
-    public TMPro.TextMeshProUGUI MeatCountText;
+    public TMPro.TextMeshProUGUI AntsCountText;
+    public TMPro.TextMeshProUGUI LeavesCountText, MeatCountText;
     public Image ExperienceBar;
+    public TMPro.TextMeshProUGUI LevelText, ExperienceText;
 
     [Header("Dig")]
     public int[] diggingProgress;
     public int[] diggingRequirement;
-    public int roomSelected;
 
     [Header("Dig UI")]
     public GameObject[] UnlockObject;
@@ -48,6 +47,15 @@ public class Colony : MonoBehaviour
     [Header("Mobile")]
     public int encounter;
     public int MaxHealth, HitPoints;
+    public Image HealthBar;
+    public TMPro.TextMeshProUGUI EncounterText, HealthText;
+
+    [Header("Skill Tree")]
+    public int skillPoints;
+    public TMPro.TextMeshProUGUI SPText;
+    public GameObject SkillTreeObject;
+    public bool[] Perk;
+    int bonusClick, multiclassAnt;
 
     void Start()
     {
@@ -69,34 +77,75 @@ public class Colony : MonoBehaviour
         while (progress >= timeToSpawn)
         {
             progress -= timeToSpawn;
-            SpawnAnt();
+            SpawnAnt(workerPower);
         }
         ProgressBar.fillAmount = progress / timeToSpawn;
     }
 
     public void SelectRoom(int room)
     {
-        roomSelected = room;
+        if (room == 0 && ants > 0)
+            WorkerCombat();
+        else if (ants > 0)
+            Dig(room);
     }
 
     public void QueenClicked()
     {
-        SpawnAnt();
+        if (Perk[6])
+        {
+            bonusClick++;
+            if (bonusClick >= 4)
+            {
+                bonusClick -= 4;
+                QueenClicked();
+            }
+        }
+        SpawnAnt(workerPower);
+        if (Perk[3])
+        {
+            if (autoSpawn)
+                Progress(0.15f * summonMultiplyer);
+            if (LeafcuttersScript.built)
+                LeafcuttersScript.Progress(0.15f * summonMultiplyer);
+            if (BulletsScript.built)
+                BulletsScript.Progress(0.15f * summonMultiplyer);
+        }
     }
 
-    void SpawnAnt()
+    public void SpawnAnt(int amount)
     {
-        if (roomSelected == 0)
-            WorkerCombat();
-        else Dig(workerPower);
+        ants += amount;
+        AntsCountText.text = ants.ToString();
+        if (Perk[10])
+        {
+            multiclassAnt += amount;
+            while (amount >= 30)
+            {
+                if (LeafcuttersScript.built)
+                    LeafcuttersScript.Spawn();
+                if (BulletsScript.built)
+                    BulletsScript.Spawn();
+            }
+        }
     }
 
     void WorkerCombat()
     {
-        roll = Random.Range(workerDamage[0], workerDamage[1] + 1);
-        roll *= workerPower;
+        if (Perk[4])
+            roll = Random.Range((workerDamage[0] + 1) * ants, (workerDamage[1] + 1) * ants + 1);
+        else roll = Random.Range(workerDamage[0] * ants, workerDamage[1] * ants + 1);
 
         TakeDamage(roll);
+
+        if (Perk[1])
+        {
+            temp = Random.Range(0f, 0.2f);
+            temp *= ants * 1f;
+            ants = Mathf.FloorToInt(temp);
+        }
+        else ants = 0;
+        AntsCountText.text = ants.ToString();
     }
 
     public void TakeDamage(int amount)
@@ -110,14 +159,24 @@ public class Colony : MonoBehaviour
             SetEncounter();
         }
         HealthBar.fillAmount = (HitPoints * 1f) / (MaxHealth * 1f);
+        HealthText.text = HitPoints.ToString() + "/" + MaxHealth.ToString();
     }
 
-    void Dig(int amount)
+    void Dig(int room)
     {
-        diggingProgress[roomSelected - 1] += amount;
-        UnlockProgressText[roomSelected - 1].text = diggingProgress[roomSelected - 1].ToString() + "/" + diggingRequirement[roomSelected - 1].ToString();
-        if (diggingProgress[roomSelected - 1] >= diggingRequirement[roomSelected - 1])
-            RoomDug(roomSelected - 1);
+        if (ants + diggingProgress[room - 1] >= diggingRequirement[room - 1])
+        {
+            ants -= (diggingRequirement[room - 1] - diggingProgress[room - 1]);
+            AntsCountText.text = ants.ToString();
+            RoomDug(room - 1);
+        }
+        else
+        {
+            diggingProgress[room - 1] += ants;
+            ants = 0;
+            AntsCountText.text = ants.ToString();
+            UnlockProgressText[room - 1].text = diggingProgress[room - 1].ToString() + "/" + diggingRequirement[room - 1].ToString();
+        }
     }
 
     void RoomDug(int which)
@@ -142,13 +201,14 @@ public class Colony : MonoBehaviour
                 BulletsScript.secondFloor = true;
                 break;
         }
-        SelectRoom(0);
     }
 
     public void GainLeaves(int amount)
     {
         leaves += amount;
-        GainExperience(amount * 2);
+        if (Perk[2])
+            GainExperience(amount * 3);
+        else GainExperience(amount * 2);
         LeavesCountText.text = leaves.ToString();
     }
 
@@ -176,13 +236,22 @@ public class Colony : MonoBehaviour
         if (experience >= experienceReq)
             LevelUp();
         ExperienceBar.fillAmount = (experience * 1f) / (experienceReq * 1f);
+        ExperienceText.text = experience.ToString() + "/" + experienceReq.ToString();
     }
 
     void LevelUp()
     {
         experience -= experienceReq;
         level++;
+        LevelText.text = level.ToString();
         experienceReq = NextLevelExpReq();
+        GainExperience(0);
+        skillPoints++;
+        if (level % 5 == 0)
+            skillPoints++;
+        SPText.text = skillPoints.ToString();
+        if (Perk[8])
+            summonMultiplyer += 0.02f;
     }
 
     // Checks
@@ -193,9 +262,44 @@ public class Colony : MonoBehaviour
 
     void SetEncounter()
     {
-        temp = (50f + encounter * 2.2f) * (1f + encounter * 0.016f);
+        temp = (50f + encounter * 2.1f) * (1f + encounter * 0.0155f);
         MaxHealth = Mathf.FloorToInt(temp);
-        HitPoints = MaxHealth;
+        HitPoints += MaxHealth;
+        if (HitPoints < 0)
+            TakeDamage(1);
+        EncounterText.text = encounter.ToString();
         HealthBar.fillAmount = 1f;
+        HealthText.text = HitPoints.ToString() + "/" + MaxHealth.ToString();
+    }
+
+    public void SkillTree()
+    {
+        SkillTreeObject.SetActive(!SkillTreeObject.activeSelf);
+    }
+
+    public void BuyPerk(int which)
+    {
+        Perk[which] = true;
+        switch (which)
+        {
+            case 0:
+                summonMultiplyer += 0.2f;
+                break;
+            case 6:
+                bonusClick++;
+                break;
+            case 8:
+                summonMultiplyer += 0.02f * level;
+                break;
+            case 11:
+                Invoke("AutoClick", 0.8f);
+                break;
+        }
+    }
+
+    void AutoClick()
+    {
+        QueenClicked();
+        Invoke("AutoClick", 0.8f);
     }
 }

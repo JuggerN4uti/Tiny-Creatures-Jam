@@ -37,10 +37,14 @@ public class Bullets : MonoBehaviour
         ProgressBar.fillAmount = progress / timeToSpawn;
     }
 
-    void Spawn()
+    public void Spawn()
     {
         roll = Random.Range(bulletDamage[0], bulletDamage[1] + 1);
-        ColonyScript.GainLeaves(roll);
+
+        if (ColonyScript.Perk[4])
+            roll++;
+        if (ColonyScript.Perk[8])
+            roll += ColonyScript.level / 2;
 
         ColonyScript.TakeDamage(roll);
     }

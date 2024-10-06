@@ -101,6 +101,9 @@ public class UpgradeHUD : MonoBehaviour
             case (1, 3):
                 LeafcuttersScript.timeToSpawn = 3.8f;
                 break;
+            case (1, 4):
+                LeafcuttersScript.timeToSpawn = 3.2f;
+                break;
             case (2, 0):
                 BulletsScript.timeToSpawn = 8.1f;
                 break;
@@ -152,20 +155,20 @@ public class UpgradeHUD : MonoBehaviour
                 LeafcuttersScript.LeavesCollected[1] = 12;
                 break;
             case (2, 0):
-                BulletsScript.bulletDamage[0] = 7;
-                BulletsScript.bulletDamage[1] = 10;
+                BulletsScript.bulletDamage[0] = 10;
+                BulletsScript.bulletDamage[1] = 15;
                 break;
             case (2, 1):
-                BulletsScript.bulletDamage[0] = 10;
-                BulletsScript.bulletDamage[1] = 14;
+                BulletsScript.bulletDamage[0] = 14;
+                BulletsScript.bulletDamage[1] = 21;
                 break;
             case (2, 2):
-                BulletsScript.bulletDamage[0] = 14;
-                BulletsScript.bulletDamage[1] = 19;
+                BulletsScript.bulletDamage[0] = 20;
+                BulletsScript.bulletDamage[1] = 28;
                 break;
             case (2, 3):
-                BulletsScript.bulletDamage[0] = 18;
-                BulletsScript.bulletDamage[1] = 25;
+                BulletsScript.bulletDamage[0] = 25;
+                BulletsScript.bulletDamage[1] = 37;
                 break;
         }
         RoomUpgrades[currentSelected].upgradesBought2++;
