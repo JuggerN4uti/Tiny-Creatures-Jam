@@ -7,6 +7,7 @@ public class Colony : MonoBehaviour
 {
     [Header("Scripts")]
     public Leafcutters LeafcuttersScript;
+    public Bullets BulletsScript;
 
     [Header("Stats")]
     public int workerPower;
@@ -19,6 +20,7 @@ public class Colony : MonoBehaviour
 
     [Header("UI")]
     public GameObject LeafcutterUpgrade;
+    public GameObject BulletUpgrade;
     public Image ProgressBar;
     public Image HealthBar;
 
@@ -97,7 +99,7 @@ public class Colony : MonoBehaviour
         TakeDamage(roll);
     }
 
-    void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         HitPoints -= amount;
         if (HitPoints <= 0)
@@ -121,12 +123,23 @@ public class Colony : MonoBehaviour
     void RoomDug(int which)
     {
         UnlockObject[which].SetActive(false);
-        RoomObject[which].SetActive(true);
         switch (which)
         {
             case 0:
+                RoomObject[which].SetActive(true);
                 LeafcuttersScript.built = true;
                 LeafcutterUpgrade.SetActive(true);
+                break;
+            case 1:
+                RoomObject[which].SetActive(true);
+                BulletsScript.built = true;
+                BulletUpgrade.SetActive(true);
+                break;
+            case 2:
+                LeafcuttersScript.secondFloor = true;
+                break;
+            case 3:
+                BulletsScript.secondFloor = true;
                 break;
         }
         SelectRoom(0);

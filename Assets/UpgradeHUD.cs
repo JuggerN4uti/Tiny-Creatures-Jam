@@ -8,6 +8,7 @@ public class UpgradeHUD : MonoBehaviour
     [Header("Scripts")]
     public Colony ColonyScript;
     public Leafcutters LeafcuttersScript;
+    public Bullets BulletsScript;
     public Upgrades[] RoomUpgrades;
 
     [Header("UI")]
@@ -85,17 +86,32 @@ public class UpgradeHUD : MonoBehaviour
             case (0, 3):
                 ColonyScript.timeToSpawn = 1.5f;
                 break;
+            case (0, 4):
+                ColonyScript.timeToSpawn = 1.1f;
+                break;
             case (1, 0):
                 LeafcuttersScript.timeToSpawn = 7f;
                 break;
-            case (2, 1):
+            case (1, 1):
                 LeafcuttersScript.timeToSpawn = 6.1f;
                 break;
-            case (3, 2):
+            case (1, 2):
                 LeafcuttersScript.timeToSpawn = 5.3f;
                 break;
-            case (4, 3):
+            case (1, 3):
                 LeafcuttersScript.timeToSpawn = 4.6f;
+                break;
+            case (2, 0):
+                BulletsScript.timeToSpawn = 9.1f;
+                break;
+            case (2, 1):
+                BulletsScript.timeToSpawn = 7.9f;
+                break;
+            case (2, 2):
+                BulletsScript.timeToSpawn = 6.8f;
+                break;
+            case (2, 3):
+                BulletsScript.timeToSpawn = 5.8f;
                 break;
         }
         RoomUpgrades[currentSelected].upgradesBought1++;
@@ -123,17 +139,33 @@ public class UpgradeHUD : MonoBehaviour
                 LeafcuttersScript.LeavesCollected[0] = 2;
                 LeafcuttersScript.LeavesCollected[1] = 3;
                 break;
-            case (2, 1):
+            case (1, 1):
                 LeafcuttersScript.LeavesCollected[0] = 3;
                 LeafcuttersScript.LeavesCollected[1] = 5;
                 break;
-            case (3, 2):
+            case (1, 2):
                 LeafcuttersScript.LeavesCollected[0] = 5;
                 LeafcuttersScript.LeavesCollected[1] = 8;
                 break;
-            case (4, 3):
+            case (1, 3):
                 LeafcuttersScript.LeavesCollected[0] = 7;
                 LeafcuttersScript.LeavesCollected[1] = 12;
+                break;
+            case (2, 0):
+                BulletsScript.bulletDamage[0] = 7;
+                BulletsScript.bulletDamage[1] = 10;
+                break;
+            case (2, 1):
+                BulletsScript.bulletDamage[0] = 10;
+                BulletsScript.bulletDamage[1] = 14;
+                break;
+            case (2, 2):
+                BulletsScript.bulletDamage[0] = 14;
+                BulletsScript.bulletDamage[1] = 19;
+                break;
+            case (2, 3):
+                BulletsScript.bulletDamage[0] = 18;
+                BulletsScript.bulletDamage[1] = 25;
                 break;
         }
         RoomUpgrades[currentSelected].upgradesBought2++;
