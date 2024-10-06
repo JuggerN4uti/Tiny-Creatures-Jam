@@ -46,9 +46,11 @@ public class Leafcutters : MonoBehaviour
     public void Spawn()
     {
         roll = Random.Range(LeavesCollected[0], LeavesCollected[1] + 1);
+
         if (ColonyScript.Perk[5])
-            ColonyScript.GainLeaves(roll + 2);
-        else ColonyScript.GainLeaves(roll);
+            roll += 2;
+        
+        ColonyScript.GainLeaves(roll);
 
         if (ColonyScript.Perk[7])
             ColonyScript.SpawnAnt(1);

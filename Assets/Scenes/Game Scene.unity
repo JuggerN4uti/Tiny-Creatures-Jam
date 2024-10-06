@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 65586322}
   - component: {fileID: 65586321}
   - component: {fileID: 65586320}
+  - component: {fileID: 65586323}
   m_Layer: 0
   m_Name: Perk3
   m_TagString: Untagged
@@ -377,14 +378,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -427,6 +428,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65586318}
   m_CullTransparentMesh: 1
+--- !u!114 &65586323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65586318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Every Leaf collected gives 1 more Experience
+  Tooltip: {fileID: 294784475}
 --- !u!1 &74090537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1109,7 @@ GameObject:
   - component: {fileID: 253547358}
   - component: {fileID: 253547357}
   - component: {fileID: 253547356}
+  - component: {fileID: 253547359}
   m_Layer: 0
   m_Name: Perk12
   m_TagString: Untagged
@@ -1164,14 +1180,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 11
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1214,6 +1230,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253547354}
   m_CullTransparentMesh: 1
+--- !u!114 &253547359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253547354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Auto Click Queen every 0.8s
+  Tooltip: {fileID: 294784475}
 --- !u!1 &281816243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,6 +1375,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281816243}
+  m_CullTransparentMesh: 1
+--- !u!1 &294784473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 294784474}
+  - component: {fileID: 294784476}
+  - component: {fileID: 294784475}
+  m_Layer: 0
+  m_Name: Amount (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &294784474
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294784473}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 757276476}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -225, y: -50}
+  m_SizeDelta: {x: 225, y: 125}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &294784475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294784473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4283108397
+  m_fontColor: {r: 0.1764706, g: 0.04705883, b: 0.29411766, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 18
+  m_fontSizeBase: 18
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &294784476
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294784473}
   m_CullTransparentMesh: 1
 --- !u!1 &363450586
 GameObject:
@@ -2375,6 +2539,7 @@ GameObject:
   - component: {fileID: 639444934}
   - component: {fileID: 639444933}
   - component: {fileID: 639444932}
+  - component: {fileID: 639444935}
   m_Layer: 0
   m_Name: Perk4
   m_TagString: Untagged
@@ -2445,14 +2610,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2495,6 +2660,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639444930}
   m_CullTransparentMesh: 1
+--- !u!114 &639444935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639444930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Every Click speeds up all Spawns by 0.15s
+  Tooltip: {fileID: 294784475}
 --- !u!1 &705358181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2706,6 +2885,7 @@ RectTransform:
   - {fileID: 1866908086}
   - {fileID: 870368094}
   - {fileID: 253547355}
+  - {fileID: 294784474}
   m_Father: {fileID: 1361213527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
@@ -3325,6 +3505,7 @@ GameObject:
   - component: {fileID: 870368097}
   - component: {fileID: 870368096}
   - component: {fileID: 870368095}
+  - component: {fileID: 870368098}
   m_Layer: 0
   m_Name: Perk11
   m_TagString: Untagged
@@ -3395,14 +3576,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3445,6 +3626,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870368093}
   m_CullTransparentMesh: 1
+--- !u!114 &870368098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870368093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Every 30th Worker Ant becomes Leafcutter & Bullet Ant
+  Tooltip: {fileID: 294784475}
 --- !u!1 &872143033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3457,6 +3652,7 @@ GameObject:
   - component: {fileID: 872143037}
   - component: {fileID: 872143036}
   - component: {fileID: 872143035}
+  - component: {fileID: 872143038}
   m_Layer: 0
   m_Name: Perk6
   m_TagString: Untagged
@@ -3527,14 +3723,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3577,6 +3773,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872143033}
   m_CullTransparentMesh: 1
+--- !u!114 &872143038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872143033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Increase all Leaves collected by 2
+  Tooltip: {fileID: 294784475}
 --- !u!1 &919186986
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,6 +3799,7 @@ GameObject:
   - component: {fileID: 919186990}
   - component: {fileID: 919186989}
   - component: {fileID: 919186988}
+  - component: {fileID: 919186991}
   m_Layer: 0
   m_Name: Perk9
   m_TagString: Untagged
@@ -3659,14 +3870,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3709,6 +3920,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919186986}
   m_CullTransparentMesh: 1
+--- !u!114 &919186991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919186986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: +2% Spawn Rate for every Level
+  Tooltip: {fileID: 294784475}
 --- !u!1 &952426648
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,6 +4911,7 @@ GameObject:
   - component: {fileID: 1211668502}
   - component: {fileID: 1211668501}
   - component: {fileID: 1211668500}
+  - component: {fileID: 1211668503}
   m_Layer: 0
   m_Name: Perk5
   m_TagString: Untagged
@@ -4756,14 +4982,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4806,6 +5032,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211668498}
   m_CullTransparentMesh: 1
+--- !u!114 &1211668503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211668498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Increase Damage of all Ants by 1
+  Tooltip: {fileID: 294784475}
 --- !u!1 &1218435771
 GameObject:
   m_ObjectHideFlags: 0
@@ -5217,11 +5457,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1702912352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -90, y: -4}
-  m_SizeDelta: {x: 30, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -25, y: -4}
+  m_SizeDelta: {x: 60, y: 30}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1361213526
 GameObject:
   m_ObjectHideFlags: 0
@@ -5328,9 +5568,25 @@ MonoBehaviour:
   EncounterText: {fileID: 1290135400}
   HealthText: {fileID: 1460585459}
   skillPoints: 0
+  pointsSpent: 0
   SPText: {fileID: 1755996838}
   SkillTreeObject: {fileID: 757276475}
+  PerkButton:
+  - {fileID: 1649346441}
+  - {fileID: 1849420380}
+  - {fileID: 65586320}
+  - {fileID: 639444932}
+  - {fileID: 1211668500}
+  - {fileID: 872143035}
+  - {fileID: 1785325354}
+  - {fileID: 1604726188}
+  - {fileID: 919186988}
+  - {fileID: 1866908087}
+  - {fileID: 870368095}
+  - {fileID: 253547356}
   Perk: 000000000000000000000000
+  aviableToBuy: 010101000000000000000000
+  perkCost: 010000000100000001000000010000000100000001000000020000000200000001000000010000000100000003000000
 --- !u!114 &1361213529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6290,6 +6546,7 @@ GameObject:
   - component: {fileID: 1604726190}
   - component: {fileID: 1604726189}
   - component: {fileID: 1604726188}
+  - component: {fileID: 1604726191}
   m_Layer: 0
   m_Name: Perk8
   m_TagString: Untagged
@@ -6360,14 +6617,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6410,6 +6667,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604726186}
   m_CullTransparentMesh: 1
+--- !u!114 &1604726191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604726186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Leafcutter Ants spawn 25% faster & become Worker Ants as well
+  Tooltip: {fileID: 294784475}
 --- !u!1 &1614452598
 GameObject:
   m_ObjectHideFlags: 0
@@ -6869,6 +7140,7 @@ GameObject:
   - component: {fileID: 1649346443}
   - component: {fileID: 1649346442}
   - component: {fileID: 1649346441}
+  - component: {fileID: 1649346444}
   m_Layer: 0
   m_Name: Perk1
   m_TagString: Untagged
@@ -6939,13 +7211,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6989,6 +7261,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649346439}
   m_CullTransparentMesh: 1
+--- !u!114 &1649346444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649346439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: +20% Spawn Rate
+  Tooltip: {fileID: 294784475}
 --- !u!1 &1653647370
 GameObject:
   m_ObjectHideFlags: 0
@@ -7310,6 +7596,7 @@ GameObject:
   - component: {fileID: 1785325356}
   - component: {fileID: 1785325355}
   - component: {fileID: 1785325354}
+  - component: {fileID: 1785325357}
   m_Layer: 0
   m_Name: Perk7
   m_TagString: Untagged
@@ -7380,14 +7667,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7430,6 +7717,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785325352}
   m_CullTransparentMesh: 1
+--- !u!114 &1785325357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785325352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Every 3rd Click is Doubled
+  Tooltip: {fileID: 294784475}
 --- !u!1 &1849420378
 GameObject:
   m_ObjectHideFlags: 0
@@ -7442,6 +7743,7 @@ GameObject:
   - component: {fileID: 1849420382}
   - component: {fileID: 1849420381}
   - component: {fileID: 1849420380}
+  - component: {fileID: 1849420383}
   m_Layer: 0
   m_Name: Perk2
   m_TagString: Untagged
@@ -7512,14 +7814,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7562,6 +7864,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849420378}
   m_CullTransparentMesh: 1
+--- !u!114 &1849420383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849420378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Up to 20% Worker Ants survive Combat
+  Tooltip: {fileID: 294784475}
 --- !u!1 &1856075515
 GameObject:
   m_ObjectHideFlags: 0
@@ -7784,6 +8100,7 @@ GameObject:
   - component: {fileID: 1866908089}
   - component: {fileID: 1866908088}
   - component: {fileID: 1866908087}
+  - component: {fileID: 1866908090}
   m_Layer: 0
   m_Name: Perk10
   m_TagString: Untagged
@@ -7854,14 +8171,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1361213526}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1361213528}
+        m_TargetAssemblyTypeName: Colony, Assembly-CSharp
+        m_MethodName: BuyPerk
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 9
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7904,6 +8221,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866908085}
   m_CullTransparentMesh: 1
+--- !u!114 &1866908090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866908085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3208b605f8c654db7a10c3460273ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectText: Bullet Ants deal 1 more Damage for every 2 Levels
+  Tooltip: {fileID: 294784475}
 --- !u!1 &1894606437
 GameObject:
   m_ObjectHideFlags: 0

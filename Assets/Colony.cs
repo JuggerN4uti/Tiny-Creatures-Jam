@@ -52,9 +52,12 @@ public class Colony : MonoBehaviour
 
     [Header("Skill Tree")]
     public int skillPoints;
+    public int pointsSpent;
     public TMPro.TextMeshProUGUI SPText;
     public GameObject SkillTreeObject;
-    public bool[] Perk;
+    public Button[] PerkButton;
+    public bool[] Perk, aviableToBuy;
+    public int[] perkCost;
     int bonusClick, multiclassAnt;
 
     void Start()
@@ -63,6 +66,7 @@ public class Colony : MonoBehaviour
         experienceReq = NextLevelExpReq();
         encounter = 1;
         SetEncounter();
+        CheckAviablePerks();
     }
 
     void Update()
@@ -120,8 +124,9 @@ public class Colony : MonoBehaviour
         if (Perk[10])
         {
             multiclassAnt += amount;
-            while (amount >= 30)
+            while (multiclassAnt >= 30)
             {
+                multiclassAnt -= 30;
                 if (LeafcuttersScript.built)
                     LeafcuttersScript.Spawn();
                 if (BulletsScript.built)
@@ -247,9 +252,10 @@ public class Colony : MonoBehaviour
         experienceReq = NextLevelExpReq();
         GainExperience(0);
         skillPoints++;
-        if (level % 5 == 0)
-            skillPoints++;
+       // if (level % 5 == 0)
+       //     skillPoints++;
         SPText.text = skillPoints.ToString();
+        CheckAviablePerks();
         if (Perk[8])
             summonMultiplyer += 0.02f;
     }
@@ -257,7 +263,7 @@ public class Colony : MonoBehaviour
     // Checks
     int NextLevelExpReq()
     {
-        return 20 + level * 20 + level * (level + 1) * 5;
+        return 25 + level * 25 + level * (level + 1) * 5;
     }
 
     void SetEncounter()
@@ -279,11 +285,23 @@ public class Colony : MonoBehaviour
 
     public void BuyPerk(int which)
     {
+        skillPoints -= perkCost[which];
+        SPText.text = skillPoints.ToString();
+        //pointsSpent++;
+        pointsSpent += perkCost[which];
         Perk[which] = true;
+        aviableToBuy[which] = false;
         switch (which)
         {
             case 0:
                 summonMultiplyer += 0.2f;
+                aviableToBuy[3] = true;
+                break;
+            case 1:
+                aviableToBuy[4] = true;
+                break;
+            case 2:
+                aviableToBuy[5] = true;
                 break;
             case 6:
                 bonusClick++;
@@ -294,6 +312,32 @@ public class Colony : MonoBehaviour
             case 11:
                 Invoke("AutoClick", 0.8f);
                 break;
+        }
+        if (pointsSpent == 3)
+        {
+            aviableToBuy[6] = true;
+            aviableToBuy[7] = true;
+        }
+        if (pointsSpent >= 6)
+        {
+            for (int i = 8; i < 11; i++)
+            {
+                if (!Perk[i] && Perk[i - 5])
+                    aviableToBuy[i] = true;
+            }
+        }
+        if (pointsSpent >= 9 && !Perk[11])
+            aviableToBuy[11] = true;
+        CheckAviablePerks();
+    }
+
+    void CheckAviablePerks()
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            if (aviableToBuy[i] && skillPoints >= perkCost[i])
+                PerkButton[i].interactable = true;
+            else PerkButton[i].interactable = false;
         }
     }
 
