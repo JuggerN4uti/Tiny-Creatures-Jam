@@ -5330,7 +5330,7 @@ MonoBehaviour:
   skillPoints: 0
   SPText: {fileID: 1755996838}
   SkillTreeObject: {fileID: 757276475}
-  Perk: 
+  Perk: 000000000000000000000000
 --- !u!114 &1361213529
 MonoBehaviour:
   m_ObjectHideFlags: 0
