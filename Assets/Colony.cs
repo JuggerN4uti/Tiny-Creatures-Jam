@@ -20,7 +20,7 @@ public class Colony : MonoBehaviour
 
     [Header("UI")]
     public GameObject LeafcutterUpgrade;
-    public GameObject BulletUpgrade;
+    public GameObject BulletUpgrade, ThirdUpgrades, ResearchLair;
     public Image ProgressBar;
 
     [Header("Resources")]
@@ -43,12 +43,17 @@ public class Colony : MonoBehaviour
 
     [Header("Rooms")]
     public GameObject[] RoomObject;
+    public int[] BonusLeavesFloorsReq, BonusBulletFloorsReq;
 
     [Header("Mobile")]
     public int encounter;
     public int MaxHealth, HitPoints;
     public Image HealthBar;
     public TMPro.TextMeshProUGUI EncounterText, HealthText;
+    public GameObject DealtPrefab;
+    public Transform Origin;
+    public Rigidbody2D Body;
+    Display Displayed;
 
     [Header("Skill Tree")]
     public int skillPoints;
@@ -56,14 +61,18 @@ public class Colony : MonoBehaviour
     public TMPro.TextMeshProUGUI SPText;
     public GameObject SkillTreeObject;
     public Button[] PerkButton;
-    public bool[] Perk, aviableToBuy;
-    public int[] perkCost;
+    public GameObject[] LockImage;
+    public TMPro.TextMeshProUGUI[] PerksText;
+    public bool[] aviableToBuy;
+    public int[] Perk, perkCost, perkMax;
     int bonusClick, multiclassAnt;
 
     void Start()
     {
         level = 1;
         experienceReq = NextLevelExpReq();
+        ExperienceBar.fillAmount = (experience * 1f) / (experienceReq * 1f);
+        ExperienceText.text = experience.ToString() + "/" + experienceReq.ToString();
         encounter = 1;
         SetEncounter();
         CheckAviablePerks();
@@ -96,66 +105,71 @@ public class Colony : MonoBehaviour
 
     public void QueenClicked()
     {
-        if (Perk[6])
+        if (Perk[6] > 0)
         {
             bonusClick++;
-            if (bonusClick >= 4)
+            if (bonusClick >= 7)
             {
-                bonusClick -= 4;
+                bonusClick -= 7;
+                QueenClicked();
                 QueenClicked();
             }
         }
-        SpawnAnt(workerPower);
-        if (Perk[3])
+        SpawnAnt(workerPower + Perk[3]);
+        if (Perk[3] > 0)
         {
             if (autoSpawn)
-                Progress(0.15f * summonMultiplyer);
+                Progress(0.04f * Perk[3] * summonMultiplyer);
             if (LeafcuttersScript.built)
-                LeafcuttersScript.Progress(0.15f * summonMultiplyer);
+                LeafcuttersScript.Progress(0.04f * Perk[3] * summonMultiplyer);
             if (BulletsScript.built)
-                BulletsScript.Progress(0.15f * summonMultiplyer);
+                BulletsScript.Progress(0.04f * Perk[3] * summonMultiplyer);
         }
     }
 
     public void SpawnAnt(int amount)
     {
+        amount += Perk[10];
         ants += amount;
         AntsCountText.text = ants.ToString();
-        if (Perk[10])
+        if (Perk[10] > 0)
         {
             multiclassAnt += amount;
-            while (multiclassAnt >= 30)
+            while (multiclassAnt >= 40)
             {
-                multiclassAnt -= 30;
+                multiclassAnt -= 40;
                 if (LeafcuttersScript.built)
-                    LeafcuttersScript.Spawn();
+                    LeafcuttersScript.Spawn(Perk[10]);
                 if (BulletsScript.built)
-                    BulletsScript.Spawn();
+                    BulletsScript.Spawn(Perk[10]);
             }
         }
     }
 
     void WorkerCombat()
     {
-        if (Perk[4])
-            roll = Random.Range((workerDamage[0] + 1) * ants, (workerDamage[1] + 1) * ants + 1);
-        else roll = Random.Range(workerDamage[0] * ants, workerDamage[1] * ants + 1);
+        roll = Random.Range((workerDamage[0] + Perk[1]) * ants, (workerDamage[1] + Perk[1]) * ants + 1);
 
         TakeDamage(roll);
 
-        if (Perk[1])
-        {
-            temp = Random.Range(0f, 0.2f);
-            temp *= ants * 1f;
-            ants = Mathf.FloorToInt(temp);
-        }
-        else ants = 0;
+        ants = 0;
         AntsCountText.text = ants.ToString();
     }
 
     public void TakeDamage(int amount)
     {
         HitPoints -= amount;
+
+        if (amount != 1)
+        {
+            Origin.rotation = Quaternion.Euler(Origin.rotation.x, Origin.rotation.y, Body.rotation + Random.Range(-15f, 15f));
+            GameObject display = Instantiate(DealtPrefab, Origin.position, transform.rotation);
+            Displayed = display.GetComponent(typeof(Display)) as Display;
+            Displayed.DisplayThis(amount);
+            Rigidbody2D display_body = display.GetComponent<Rigidbody2D>();
+            display_body.AddForce(Origin.up * Random.Range(1.3f, 1.8f), ForceMode2D.Impulse);
+        }
+
         if (HitPoints <= 0)
         {
             GainMeat(6 + encounter / 3);
@@ -200,10 +214,27 @@ public class Colony : MonoBehaviour
                 BulletUpgrade.SetActive(true);
                 break;
             case 2:
-                LeafcuttersScript.secondFloor = true;
+                LeafcuttersScript.bonusFloors++;
+                if (LeafcuttersScript.bonusFloors < BonusLeavesFloorsReq.Length)
+                {
+                    UnlockObject[which].SetActive(true);
+                    diggingProgress[which] = 0;
+                    diggingRequirement[which] = BonusLeavesFloorsReq[LeafcuttersScript.bonusFloors];
+                    UnlockProgressText[which].text = diggingProgress[which].ToString() + "/" + diggingRequirement[which].ToString();
+                }
                 break;
             case 3:
-                BulletsScript.secondFloor = true;
+                BulletsScript.bonusFloors++;
+                if (BulletsScript.bonusFloors < BonusBulletFloorsReq.Length)
+                {
+                    UnlockObject[which].SetActive(true);
+                    diggingProgress[which] = 0;
+                    diggingRequirement[which] = BonusBulletFloorsReq[BulletsScript.bonusFloors];
+                    UnlockProgressText[which].text = diggingProgress[which].ToString() + "/" + diggingRequirement[which].ToString();
+                }
+                break;
+            case 4:
+                ThirdUpgrades.SetActive(true);
                 break;
         }
     }
@@ -211,9 +242,7 @@ public class Colony : MonoBehaviour
     public void GainLeaves(int amount)
     {
         leaves += amount;
-        if (Perk[2])
-            GainExperience(amount * 3);
-        else GainExperience(amount * 2);
+        GainExperience(amount * (2 + Perk[2]));
         LeavesCountText.text = leaves.ToString();
     }
 
@@ -235,6 +264,20 @@ public class Colony : MonoBehaviour
         MeatCountText.text = meat.ToString();
     }
 
+    public void GainSP()
+    {
+        skillPoints++;
+        SPText.text = skillPoints.ToString();
+        CheckAviablePerks();
+    }
+
+    public void SpendSP(int amount)
+    {
+        skillPoints -= amount;
+        SPText.text = skillPoints.ToString();
+        CheckAviablePerks();
+    }
+
     public void GainExperience(int amount)
     {
         experience += amount;
@@ -248,22 +291,21 @@ public class Colony : MonoBehaviour
     {
         experience -= experienceReq;
         level++;
+        if (level == 20)
+            ResearchLair.SetActive(true);
         LevelText.text = level.ToString();
         experienceReq = NextLevelExpReq();
         GainExperience(0);
-        skillPoints++;
+        GainSP();
        // if (level % 5 == 0)
        //     skillPoints++;
-        SPText.text = skillPoints.ToString();
-        CheckAviablePerks();
-        if (Perk[8])
-            summonMultiplyer += 0.02f;
+        summonMultiplyer += 0.01f * Perk[8];
     }
 
     // Checks
     int NextLevelExpReq()
     {
-        return 25 + level * 25 + level * (level + 1) * 5;
+        return 50 + level * 30 + level * (level + 1) * 6;
     }
 
     void SetEncounter()
@@ -285,49 +327,53 @@ public class Colony : MonoBehaviour
 
     public void BuyPerk(int which)
     {
-        skillPoints -= perkCost[which];
-        SPText.text = skillPoints.ToString();
+        SpendSP(perkCost[which]);
         //pointsSpent++;
         pointsSpent += perkCost[which];
-        Perk[which] = true;
-        aviableToBuy[which] = false;
+        Perk[which]++;
+        if (Perk[which] == perkMax[which])
+            aviableToBuy[which] = false;
+        PerksText[which].text = Perk[which].ToString() + "/" + perkMax[which].ToString();
         switch (which)
         {
             case 0:
-                summonMultiplyer += 0.2f;
-                aviableToBuy[3] = true;
-                break;
-            case 1:
-                aviableToBuy[4] = true;
-                break;
-            case 2:
-                aviableToBuy[5] = true;
+                summonMultiplyer += 0.12f;
                 break;
             case 6:
-                bonusClick++;
+                bonusClick += 2;
                 break;
             case 8:
-                summonMultiplyer += 0.02f * level;
+                summonMultiplyer += 0.01f * level;
                 break;
             case 11:
-                Invoke("AutoClick", 0.8f);
+                Invoke("AutoClick", 0.7f);
                 break;
         }
-        if (pointsSpent == 3)
+        if (pointsSpent >= 2)
         {
-            aviableToBuy[6] = true;
-            aviableToBuy[7] = true;
+            for (int i = 3; i < 6; i++)
+            {
+                if (Perk[i] < perkMax[i] && Perk[i - 3] > 0)
+                    UnlockPerk(i);
+            }
         }
-        if (pointsSpent >= 6)
+        if (pointsSpent >= 4)
+        {
+            if (Perk[6] == 0)
+                UnlockPerk(6);
+            if (Perk[7] == 0)
+                UnlockPerk(7);
+        }
+        if (pointsSpent >= 7)
         {
             for (int i = 8; i < 11; i++)
             {
-                if (!Perk[i] && Perk[i - 5])
-                    aviableToBuy[i] = true;
+                if (Perk[i] < perkMax[i] && Perk[i - 5] > 0)
+                    UnlockPerk(i);
             }
         }
-        if (pointsSpent >= 9 && !Perk[11])
-            aviableToBuy[11] = true;
+        if (pointsSpent >= 11 && Perk[11] == 0)
+            UnlockPerk(11);
         CheckAviablePerks();
     }
 
@@ -341,9 +387,15 @@ public class Colony : MonoBehaviour
         }
     }
 
+    void UnlockPerk(int which)
+    {
+        aviableToBuy[which] = true;
+        LockImage[which].SetActive(false);
+    }
+
     void AutoClick()
     {
         QueenClicked();
-        Invoke("AutoClick", 0.8f);
+        Invoke("AutoClick", 0.7f);
     }
 }

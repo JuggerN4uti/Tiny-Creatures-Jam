@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class Display : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI Value;
+    public string bonusChar;
     //public Image Icon;
 
     public void DisplayThis(int value) //Sprite sprite)
     {
-        Value.text = "+" + value.ToString("0");
+        Value.text = bonusChar + value.ToString("0");
         //Icon.sprite = sprite;
     }
 

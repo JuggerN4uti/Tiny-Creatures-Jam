@@ -10,8 +10,9 @@ public class Leafcutters : MonoBehaviour
 
     [Header("Stats")]
     public bool built;
-    public bool secondFloor;
+    public int bonusFloors;
     public float progress, timeToSpawn;
+    public int bonus;
     public int[] LeavesCollected;
     int roll;
 
@@ -30,29 +31,30 @@ public class Leafcutters : MonoBehaviour
 
     public void Progress(float value)
     {
-        if (ColonyScript.Perk[7])
-            value *= 1.25f;
+        value *= 1f + 0.32f * ColonyScript.Perk[7];
         progress += value;
         while (progress >= timeToSpawn)
         {
             progress -= timeToSpawn;
-            Spawn();
-            if (secondFloor)
-                Invoke("Spawn", 0.25f);
+            Spawn(1 + bonusFloors);
         }
         ProgressBar.fillAmount = progress / timeToSpawn;
     }
 
-    public void Spawn()
+    public void Spawn(int amount)
     {
         roll = Random.Range(LeavesCollected[0], LeavesCollected[1] + 1);
 
-        if (ColonyScript.Perk[5])
-            roll += 2;
-        
+        roll += 2 * ColonyScript.Perk[5];
+
+        if (bonus != 0)
+            roll += ColonyScript.level / bonus;
+
+        roll *= amount;
+
         ColonyScript.GainLeaves(roll);
 
-        if (ColonyScript.Perk[7])
+        if (ColonyScript.Perk[7] > 0)
             ColonyScript.SpawnAnt(1);
 
         Origin.rotation = Quaternion.Euler(Origin.rotation.x, Origin.rotation.y, Body.rotation + Random.Range(-5f, 5f));

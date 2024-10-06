@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Value: {fileID: 6599447515843605433}
+  bonusChar: +
 --- !u!114 &8818619559303861306
 MonoBehaviour:
   m_ObjectHideFlags: 0

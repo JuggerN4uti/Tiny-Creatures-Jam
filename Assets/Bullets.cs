@@ -10,8 +10,9 @@ public class Bullets : MonoBehaviour
 
     [Header("Stats")]
     public bool built;
-    public bool secondFloor;
+    public int bonusFloors;
     public float progress, timeToSpawn;
+    public int bonus;
     public int[] bulletDamage;
     int roll;
 
@@ -26,25 +27,30 @@ public class Bullets : MonoBehaviour
 
     public void Progress(float value)
     {
+        value *= 1f + ColonyScript.Perk[4] * 0.15f;
         progress += value;
         while (progress >= timeToSpawn)
         {
             progress -= timeToSpawn;
-            Spawn();
-            if (secondFloor)
-                Invoke("Spawn", 0.25f);
+            Spawn(1 + bonusFloors);
         }
         ProgressBar.fillAmount = progress / timeToSpawn;
     }
 
-    public void Spawn()
+    public void Spawn(int amount)
     {
         roll = Random.Range(bulletDamage[0], bulletDamage[1] + 1);
 
-        if (ColonyScript.Perk[4])
-            roll++;
-        if (ColonyScript.Perk[8])
-            roll += ColonyScript.level / 2;
+        roll += ColonyScript.Perk[1];
+
+        roll += (ColonyScript.level * ColonyScript.Perk[9]) / 2;
+
+        roll += bonus;
+
+        roll *= amount;
+
+        if (ColonyScript.Perk[4] > 0)
+            roll += Mathf.FloorToInt(roll * 0.1f * ColonyScript.Perk[4]);
 
         ColonyScript.TakeDamage(roll);
     }
