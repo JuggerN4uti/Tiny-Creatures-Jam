@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Colony : MonoBehaviour
 {
@@ -430,5 +431,10 @@ public class Colony : MonoBehaviour
         {
             Animators[i].enabled = !animationOff;
         }
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene(0);
     }
 }
