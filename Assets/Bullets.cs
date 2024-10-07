@@ -27,7 +27,7 @@ public class Bullets : MonoBehaviour
 
     public void Progress(float value)
     {
-        value *= 1f + ColonyScript.Perk[4] * 0.15f;
+        value *= 1f + ColonyScript.Perk[4] * 0.12f;
         progress += value;
         while (progress >= timeToSpawn)
         {
@@ -37,9 +37,10 @@ public class Bullets : MonoBehaviour
         ProgressBar.fillAmount = progress / timeToSpawn;
     }
 
-    public void Spawn(int amount)
+    public void Spawn(int amount, bool fiedAmount = false)
     {
-        amount += ColonyScript.bonus;
+        if (!fiedAmount)
+            amount += ColonyScript.bonus;
 
         roll = Random.Range(bulletDamage[0], bulletDamage[1] + 1);
 
@@ -52,7 +53,7 @@ public class Bullets : MonoBehaviour
         roll *= amount;
 
         if (ColonyScript.Perk[4] > 0)
-            roll += Mathf.FloorToInt(roll * 0.1f * ColonyScript.Perk[4]);
+            roll += Mathf.FloorToInt(roll * 0.12f * ColonyScript.Perk[4]);
 
         ColonyScript.TakeDamage(roll);
     }

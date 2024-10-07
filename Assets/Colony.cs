@@ -55,7 +55,8 @@ public class Colony : MonoBehaviour
     [Header("Mobile")]
     public int encounter;
     public int MaxHealth, HitPoints;
-    public Image HealthBar;
+    public Image HealthBar, MobImage;
+    public Sprite[] MobSprite;
     public TMPro.TextMeshProUGUI EncounterText, HealthText;
     public GameObject DealtPrefab;
     public Transform Origin;
@@ -134,22 +135,25 @@ public class Colony : MonoBehaviour
         }
     }
 
-    public void SpawnAnt(int amount)
+    public void SpawnAnt(int amount, bool fixedAmount = false)
     {
-        amount += Perk[10];
-        amount += bonus;
+        if (!fixedAmount)
+        {
+            amount += Perk[7] * 2;
+            amount += bonus;
+        }
         ants += amount;
         AntsCountText.text = ants.ToString();
-        if (Perk[10] > 0)
+        if (Perk[7] > 0)
         {
             multiclassAnt += amount;
-            while (multiclassAnt >= 40)
+            while (multiclassAnt >= 75)
             {
-                multiclassAnt -= 40;
+                multiclassAnt -= 75;
                 if (LeafcuttersScript.built)
-                    LeafcuttersScript.Spawn(Perk[10]);
+                    LeafcuttersScript.Spawn(Perk[7] * 2, true);
                 if (BulletsScript.built)
-                    BulletsScript.Spawn(Perk[10]);
+                    BulletsScript.Spawn(Perk[7] * 2, true);
             }
         }
     }
@@ -180,7 +184,7 @@ public class Colony : MonoBehaviour
 
         if (HitPoints <= 0)
         {
-            GainMeat(7 + (encounter * 7) / 18);
+            GainMeat(8 + (encounter * 4) / 9);
             GainExperience(22 + encounter);
             encounter++;
             SetEncounter();
@@ -307,7 +311,7 @@ public class Colony : MonoBehaviour
     {
         experience -= experienceReq;
         level++;
-        if (level == 20)
+        if (level == 25)
             ResearchLair.SetActive(true);
         LevelText.text = level.ToString();
         experienceReq = NextLevelExpReq();
@@ -321,12 +325,13 @@ public class Colony : MonoBehaviour
     // Checks
     int NextLevelExpReq()
     {
-        return 60 + level * 30 + level * (level + 1) * 6;
+        return 80 + level * 36 + level * (level + 1) * 6;
     }
 
     void SetEncounter()
     {
-        temp = (50f + encounter * 2.2f) * (1f + encounter * 0.016f);
+        MobImage.sprite = MobSprite[Random.Range(0, MobSprite.Length)];
+        temp = (50f + encounter * 2.3f) * (1f + encounter * 0.0165f);
         MaxHealth = Mathf.FloorToInt(temp);
         HitPoints += MaxHealth;
         if (HitPoints < 0)
@@ -353,7 +358,7 @@ public class Colony : MonoBehaviour
         switch (which)
         {
             case 0:
-                summonMultiplyer += 0.12f;
+                summonMultiplyer += 0.11f;
                 break;
             case 6:
                 bonusClick += 2;
@@ -362,7 +367,7 @@ public class Colony : MonoBehaviour
                 summonMultiplyer += 0.01f * level;
                 break;
             case 11:
-                Invoke("AutoClick", 0.7f);
+                Invoke("AutoClick", 0.66f);
                 break;
         }
         if (pointsSpent >= 2)
@@ -373,14 +378,14 @@ public class Colony : MonoBehaviour
                     UnlockPerk(i);
             }
         }
-        if (pointsSpent >= 4)
+        if (pointsSpent >= 5)
         {
             if (Perk[6] == 0)
                 UnlockPerk(6);
             if (Perk[7] == 0)
                 UnlockPerk(7);
         }
-        if (pointsSpent >= 7)
+        if (pointsSpent >= 9)
         {
             for (int i = 8; i < 11; i++)
             {
@@ -388,7 +393,7 @@ public class Colony : MonoBehaviour
                     UnlockPerk(i);
             }
         }
-        if (pointsSpent >= 11 && Perk[11] == 0)
+        if (pointsSpent >= 14 && Perk[11] == 0)
             UnlockPerk(11);
         CheckAviablePerks();
     }
@@ -412,7 +417,7 @@ public class Colony : MonoBehaviour
     void AutoClick()
     {
         QueenClicked();
-        Invoke("AutoClick", 0.7f);
+        Invoke("AutoClick", 0.66f);
     }
 
     public void AnimationChange()

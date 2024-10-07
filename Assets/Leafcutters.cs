@@ -12,7 +12,7 @@ public class Leafcutters : MonoBehaviour
     public bool built;
     public int bonusFloors;
     public float progress, timeToSpawn;
-    public int bonus;
+    public int bonus, Lbonus;
     public int[] LeavesCollected;
     int roll;
 
@@ -31,7 +31,7 @@ public class Leafcutters : MonoBehaviour
 
     public void Progress(float value)
     {
-        value *= 1f + 0.32f * ColonyScript.Perk[7];
+        value *= 1f + 0.12f * ColonyScript.Perk[10];
         progress += value;
         while (progress >= timeToSpawn)
         {
@@ -41,23 +41,24 @@ public class Leafcutters : MonoBehaviour
         ProgressBar.fillAmount = progress / timeToSpawn;
     }
 
-    public void Spawn(int amount)
+    public void Spawn(int amount, bool fiedAmount = false)
     {
-        amount += ColonyScript.bonus;
+        if (!fiedAmount)
+            amount += ColonyScript.bonus;
 
         roll = Random.Range(LeavesCollected[0], LeavesCollected[1] + 1);
 
         roll += 2 * ColonyScript.Perk[5];
 
         if (bonus != 0)
-            roll += ColonyScript.level / bonus;
+            roll += (ColonyScript.level * Lbonus) / bonus;
 
         roll *= amount;
 
         ColonyScript.GainLeaves(roll);
 
-        if (ColonyScript.Perk[7] > 0)
-            ColonyScript.SpawnAnt(1);
+        if (ColonyScript.Perk[10] > 0)
+            ColonyScript.SpawnAnt(ColonyScript.Perk[10], true);
 
         Origin.rotation = Quaternion.Euler(Origin.rotation.x, Origin.rotation.y, Body.rotation + Random.Range(-5f, 5f));
         GameObject display = Instantiate(CollectedPrefab, Origin.position, transform.rotation);

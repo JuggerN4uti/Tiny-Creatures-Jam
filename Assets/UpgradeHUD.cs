@@ -132,6 +132,9 @@ public class UpgradeHUD : MonoBehaviour
             case (1, 4):
                 LeafcuttersScript.timeToSpawn = 3.2f;
                 break;
+            case (1, 5):
+                LeafcuttersScript.timeToSpawn = 2.7f;
+                break;
             case (2, 0):
                 BulletsScript.timeToSpawn = 8.1f;
                 break;
@@ -146,6 +149,9 @@ public class UpgradeHUD : MonoBehaviour
                 break;
             case (2, 4):
                 BulletsScript.timeToSpawn = 3.9f;
+                break;
+            case (2, 5):
+                BulletsScript.timeToSpawn = 3.1f;
                 break;
         }
         RoomUpgrades[currentSelected].upgradesBought1++;
@@ -188,6 +194,10 @@ public class UpgradeHUD : MonoBehaviour
                 LeafcuttersScript.LeavesCollected[0] = 7;
                 LeafcuttersScript.LeavesCollected[1] = 12;
                 break;
+            case (1, 4):
+                LeafcuttersScript.LeavesCollected[0] = 10;
+                LeafcuttersScript.LeavesCollected[1] = 17;
+                break;
             case (2, 0):
                 BulletsScript.bulletDamage[0] = 13;
                 BulletsScript.bulletDamage[1] = 20;
@@ -204,6 +214,10 @@ public class UpgradeHUD : MonoBehaviour
                 BulletsScript.bulletDamage[0] = 33;
                 BulletsScript.bulletDamage[1] = 49;
                 break;
+            case (2, 4):
+                BulletsScript.bulletDamage[0] = 42;
+                BulletsScript.bulletDamage[1] = 62;
+                break;
         }
         RoomUpgrades[currentSelected].upgradesBought2++;
         SelectRoomToUpgrade(currentSelected);
@@ -211,7 +225,7 @@ public class UpgradeHUD : MonoBehaviour
 
     public void Upgrade3()
     {
-        ColonyScript.SpendSP(1);
+        ColonyScript.SpendSP(currentCosts[2]);
         switch (currentSelected, RoomUpgrades[currentSelected].upgradesBought3)
         {
             case (0, 0):
@@ -226,8 +240,12 @@ public class UpgradeHUD : MonoBehaviour
             case (0, 3):
                 ColonyScript.bonus = 5;
                 break;
+            case (0, 4):
+                ColonyScript.bonus = 7;
+                break;
             case (1, 0):
                 LeafcuttersScript.bonus = 4;
+                LeafcuttersScript.Lbonus = 1;
                 break;
             case (1, 1):
                 LeafcuttersScript.bonus = 3;
@@ -236,7 +254,12 @@ public class UpgradeHUD : MonoBehaviour
                 LeafcuttersScript.bonus = 2;
                 break;
             case (1, 3):
+                LeafcuttersScript.bonus = 3;
+                LeafcuttersScript.Lbonus = 2;
+                break;
+            case (1, 4):
                 LeafcuttersScript.bonus = 1;
+                LeafcuttersScript.Lbonus = 1;
                 break;
             case (2, 0):
                 BulletsScript.bonus = 13;
@@ -249,6 +272,9 @@ public class UpgradeHUD : MonoBehaviour
                 break;
             case (2, 3):
                 BulletsScript.bonus = 82;
+                break;
+            case (2, 4):
+                BulletsScript.bonus = 115;
                 break;
         }
         RoomUpgrades[currentSelected].upgradesBought3++;
