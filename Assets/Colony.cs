@@ -20,7 +20,7 @@ public class Colony : MonoBehaviour
 
     [Header("UI")]
     public GameObject LeafcutterUpgrade;
-    public GameObject BulletUpgrade, ThirdUpgrades, ResearchLair;
+    public GameObject BulletUpgrade, ThirdUpgrades, BulletLair, ResearchLair;
     public Image ProgressBar;
 
     [Header("Resources")]
@@ -44,6 +44,7 @@ public class Colony : MonoBehaviour
     [Header("Rooms")]
     public GameObject[] RoomObject;
     public int[] BonusLeavesFloorsReq, BonusBulletFloorsReq;
+    public GameObject[] RoomSprteObject;
 
     [Header("Mobile")]
     public int encounter;
@@ -172,8 +173,8 @@ public class Colony : MonoBehaviour
 
         if (HitPoints <= 0)
         {
-            GainMeat(6 + encounter / 3);
-            GainExperience(21 + encounter);
+            GainMeat(7 + (encounter * 7) / 18);
+            GainExperience(22 + encounter);
             encounter++;
             SetEncounter();
         }
@@ -194,7 +195,7 @@ public class Colony : MonoBehaviour
             diggingProgress[room - 1] += ants;
             ants = 0;
             AntsCountText.text = ants.ToString();
-            UnlockProgressText[room - 1].text = diggingProgress[room - 1].ToString() + "/" + diggingRequirement[room - 1].ToString();
+            UnlockProgressText[room - 1].text = (diggingRequirement[room - 1] - diggingProgress[room - 1]).ToString();
         }
     }
 
@@ -207,11 +208,14 @@ public class Colony : MonoBehaviour
                 RoomObject[which].SetActive(true);
                 LeafcuttersScript.built = true;
                 LeafcutterUpgrade.SetActive(true);
+                BulletLair.SetActive(true);
+                RoomSprteObject[0].SetActive(true);
                 break;
             case 1:
                 RoomObject[which].SetActive(true);
                 BulletsScript.built = true;
                 BulletUpgrade.SetActive(true);
+                RoomSprteObject[1].SetActive(true);
                 break;
             case 2:
                 LeafcuttersScript.bonusFloors++;
@@ -220,7 +224,7 @@ public class Colony : MonoBehaviour
                     UnlockObject[which].SetActive(true);
                     diggingProgress[which] = 0;
                     diggingRequirement[which] = BonusLeavesFloorsReq[LeafcuttersScript.bonusFloors];
-                    UnlockProgressText[which].text = diggingProgress[which].ToString() + "/" + diggingRequirement[which].ToString();
+                    UnlockProgressText[which].text = (diggingRequirement[which] - diggingProgress[which]).ToString();
                 }
                 break;
             case 3:
@@ -230,11 +234,12 @@ public class Colony : MonoBehaviour
                     UnlockObject[which].SetActive(true);
                     diggingProgress[which] = 0;
                     diggingRequirement[which] = BonusBulletFloorsReq[BulletsScript.bonusFloors];
-                    UnlockProgressText[which].text = diggingProgress[which].ToString() + "/" + diggingRequirement[which].ToString();
+                    UnlockProgressText[which].text = (diggingRequirement[which] - diggingProgress[which]).ToString();
                 }
                 break;
             case 4:
                 ThirdUpgrades.SetActive(true);
+                RoomSprteObject[2].SetActive(true);
                 break;
         }
     }
@@ -305,12 +310,12 @@ public class Colony : MonoBehaviour
     // Checks
     int NextLevelExpReq()
     {
-        return 50 + level * 30 + level * (level + 1) * 6;
+        return 60 + level * 30 + level * (level + 1) * 6;
     }
 
     void SetEncounter()
     {
-        temp = (50f + encounter * 2.1f) * (1f + encounter * 0.0155f);
+        temp = (50f + encounter * 2.2f) * (1f + encounter * 0.016f);
         MaxHealth = Mathf.FloorToInt(temp);
         HitPoints += MaxHealth;
         if (HitPoints < 0)

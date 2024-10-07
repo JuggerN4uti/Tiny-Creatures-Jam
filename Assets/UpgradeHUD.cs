@@ -16,7 +16,7 @@ public class UpgradeHUD : MonoBehaviour
     public GameObject[] ButUpgradeObject;
     public Button[] BuyUpgradeButton;
     public TMPro.TextMeshProUGUI[] CostText;
-    public TMPro.TextMeshProUGUI[] UpgradeEffect;
+    public TMPro.TextMeshProUGUI[] UpgradeEffect, ChangeEffect;
 
     [Header("Stats")]
     public int currentSelected;
@@ -52,11 +52,13 @@ public class UpgradeHUD : MonoBehaviour
             currentCosts[0] = RoomUpgrades[currentSelected].upgradeCost1[RoomUpgrades[currentSelected].upgradesBought1];
             CostText[0].text = currentCosts[0].ToString();
             UpgradeEffect[0].text = RoomUpgrades[currentSelected].upgradeText1[RoomUpgrades[currentSelected].upgradesBought1];
+            ChangeEffect[0].text = RoomUpgrades[currentSelected].changeText1[RoomUpgrades[currentSelected].upgradesBought1];
         }
         else
         {
             ButUpgradeObject[0].SetActive(false);
-            UpgradeEffect[0].text = "Maxed";
+            UpgradeEffect[0].text = RoomUpgrades[currentSelected].upgradeText1[RoomUpgrades[currentSelected].upgradesBought1];
+            ChangeEffect[0].text = "Maxed";
         }
 
         if (RoomUpgrades[currentSelected].upgradesBought2 < RoomUpgrades[currentSelected].upgradesCount2)
@@ -65,11 +67,13 @@ public class UpgradeHUD : MonoBehaviour
             currentCosts[1] = RoomUpgrades[currentSelected].upgradeCost2[RoomUpgrades[currentSelected].upgradesBought2];
             CostText[1].text = currentCosts[1].ToString();
             UpgradeEffect[1].text = RoomUpgrades[currentSelected].upgradeText2[RoomUpgrades[currentSelected].upgradesBought2];
+            ChangeEffect[1].text = RoomUpgrades[currentSelected].changeText2[RoomUpgrades[currentSelected].upgradesBought2];
         }
         else
         {
             ButUpgradeObject[1].SetActive(false);
-            UpgradeEffect[1].text = "Maxed";
+            UpgradeEffect[1].text = RoomUpgrades[currentSelected].upgradeText2[RoomUpgrades[currentSelected].upgradesBought2];
+            ChangeEffect[1].text = "Maxed";
         }
 
         if (RoomUpgrades[currentSelected].upgradesBought3 < RoomUpgrades[currentSelected].upgradesCount3)
@@ -78,11 +82,13 @@ public class UpgradeHUD : MonoBehaviour
             currentCosts[2] = RoomUpgrades[currentSelected].upgradeCost3[RoomUpgrades[currentSelected].upgradesBought3];
             CostText[2].text = currentCosts[2].ToString();
             UpgradeEffect[2].text = RoomUpgrades[currentSelected].upgradeText3[RoomUpgrades[currentSelected].upgradesBought3];
+            ChangeEffect[2].text = RoomUpgrades[currentSelected].changeText3[RoomUpgrades[currentSelected].upgradesBought3];
         }
         else
         {
             ButUpgradeObject[2].SetActive(false);
-            UpgradeEffect[2].text = "Maxed";
+            UpgradeEffect[2].text = RoomUpgrades[currentSelected].upgradeText3[RoomUpgrades[currentSelected].upgradesBought3];
+            ChangeEffect[2].text = "Maxed";
         }
     }
 
