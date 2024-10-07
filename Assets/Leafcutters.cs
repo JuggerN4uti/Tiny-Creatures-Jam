@@ -43,6 +43,8 @@ public class Leafcutters : MonoBehaviour
 
     public void Spawn(int amount)
     {
+        amount += ColonyScript.bonus;
+
         roll = Random.Range(LeavesCollected[0], LeavesCollected[1] + 1);
 
         roll += 2 * ColonyScript.Perk[5];

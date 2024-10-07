@@ -39,6 +39,8 @@ public class Bullets : MonoBehaviour
 
     public void Spawn(int amount)
     {
+        amount += ColonyScript.bonus;
+
         roll = Random.Range(bulletDamage[0], bulletDamage[1] + 1);
 
         roll += ColonyScript.Perk[1];

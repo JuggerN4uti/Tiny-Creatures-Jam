@@ -15,6 +15,7 @@ public class Colony : MonoBehaviour
     public float summonMultiplyer;
     public bool autoSpawn;
     public float progress, timeToSpawn;
+    public int bonus;
     int roll;
     float temp;
 
@@ -45,6 +46,11 @@ public class Colony : MonoBehaviour
     public GameObject[] RoomObject;
     public int[] BonusLeavesFloorsReq, BonusBulletFloorsReq;
     public GameObject[] RoomSprteObject;
+
+    [Header("Animations")]
+    public bool animationOff;
+    public GameObject[] AnimationObject;
+    public Animator[] Animators;
 
     [Header("Mobile")]
     public int encounter;
@@ -131,6 +137,7 @@ public class Colony : MonoBehaviour
     public void SpawnAnt(int amount)
     {
         amount += Perk[10];
+        amount += bonus;
         ants += amount;
         AntsCountText.text = ants.ToString();
         if (Perk[10] > 0)
@@ -210,12 +217,16 @@ public class Colony : MonoBehaviour
                 LeafcutterUpgrade.SetActive(true);
                 BulletLair.SetActive(true);
                 RoomSprteObject[0].SetActive(true);
+                AnimationObject[0].SetActive(false);
+                AnimationObject[1].SetActive(true);
                 break;
             case 1:
                 RoomObject[which].SetActive(true);
                 BulletsScript.built = true;
                 BulletUpgrade.SetActive(true);
                 RoomSprteObject[1].SetActive(true);
+                AnimationObject[1].SetActive(false);
+                AnimationObject[2].SetActive(true);
                 break;
             case 2:
                 LeafcuttersScript.bonusFloors++;
@@ -402,5 +413,17 @@ public class Colony : MonoBehaviour
     {
         QueenClicked();
         Invoke("AutoClick", 0.7f);
+    }
+
+    public void AnimationChange()
+    {
+        if (!animationOff)
+            animationOff = true;
+        else animationOff = false;
+
+        for (int i = 0; i < Animators.Length; i++)
+        {
+            Animators[i].enabled = !animationOff;
+        }
     }
 }

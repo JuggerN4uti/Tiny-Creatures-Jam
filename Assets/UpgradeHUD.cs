@@ -215,16 +215,16 @@ public class UpgradeHUD : MonoBehaviour
         switch (currentSelected, RoomUpgrades[currentSelected].upgradesBought3)
         {
             case (0, 0):
-                ColonyScript.summonMultiplyer += 0.14f;
+                ColonyScript.bonus = 1;
                 break;
             case (0, 1):
-                ColonyScript.summonMultiplyer += 0.18f;
+                ColonyScript.bonus = 2;
                 break;
             case (0, 2):
-                ColonyScript.summonMultiplyer += 0.22f;
+                ColonyScript.bonus = 3;
                 break;
             case (0, 3):
-                ColonyScript.summonMultiplyer += 0.26f;
+                ColonyScript.bonus = 5;
                 break;
             case (1, 0):
                 LeafcuttersScript.bonus = 4;
